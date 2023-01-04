@@ -3,20 +3,15 @@ import {
   Edit,
   SimpleForm,
   EditProps,
-  NumberInput,
   ReferenceInput,
   SelectInput,
 } from "react-admin";
 import { CustomerTitle } from "../customer/CustomerTitle";
-import { ProductTitle } from "../product/ProductTitle";
 
 export const OrderEdit = (props: EditProps): React.ReactElement => {
   return (
     <Edit {...props}>
       <SimpleForm>
-        <NumberInput step={1} label="Quantity" source="quantity" />
-        <NumberInput label="Discount" source="discount" />
-        <NumberInput step={1} label="Total Price" source="totalPrice" />
         <ReferenceInput
           source="customer.id"
           reference="Customer"
@@ -24,9 +19,25 @@ export const OrderEdit = (props: EditProps): React.ReactElement => {
         >
           <SelectInput optionText={CustomerTitle} />
         </ReferenceInput>
-        <ReferenceInput source="product.id" reference="Product" label="Product">
-          <SelectInput optionText={ProductTitle} />
-        </ReferenceInput>
+        <SelectInput
+          source="status"
+          label="Status"
+          choices={[
+            { label: "Pending", value: "pending" },
+            { label: "In Progress", value: "inProgress" },
+            { label: "Done", value: "done" },
+          ]}
+          optionText="label"
+          optionValue="value"
+        />
+        <SelectInput
+          source="label"
+          label="Label"
+          choices={[{ label: "Fragile", value: "fragile" }]}
+          optionText="label"
+          allowEmpty
+          optionValue="value"
+        />
       </SimpleForm>
     </Edit>
   );

@@ -14,14 +14,14 @@ import { ApiProperty } from "@nestjs/swagger";
 import {
   IsString,
   IsDate,
-  IsInt,
-  IsOptional,
-  IsNumber,
   ValidateNested,
+  IsEnum,
+  IsOptional,
 } from "class-validator";
 import { Type } from "class-transformer";
 import { Customer } from "../../customer/base/Customer";
-import { Product } from "../../product/base/Product";
+import { EnumOrderStatus } from "./EnumOrderStatus";
+import { EnumOrderLabel } from "./EnumOrderLabel";
 
 @ObjectType()
 class Order {
@@ -50,55 +50,33 @@ class Order {
   updatedAt!: Date;
 
   @ApiProperty({
-    required: false,
-    type: Number,
-  })
-  @IsInt()
-  @IsOptional()
-  @Field(() => Number, {
-    nullable: true,
-  })
-  quantity!: number | null;
-
-  @ApiProperty({
-    required: false,
-    type: Number,
-  })
-  @IsNumber()
-  @IsOptional()
-  @Field(() => Number, {
-    nullable: true,
-  })
-  discount!: number | null;
-
-  @ApiProperty({
-    required: false,
-    type: Number,
-  })
-  @IsInt()
-  @IsOptional()
-  @Field(() => Number, {
-    nullable: true,
-  })
-  totalPrice!: number | null;
-
-  @ApiProperty({
-    required: false,
+    required: true,
     type: () => Customer,
   })
   @ValidateNested()
   @Type(() => Customer)
-  @IsOptional()
-  customer?: Customer | null;
+  customer?: Customer;
+
+  @ApiProperty({
+    required: true,
+    enum: EnumOrderStatus,
+  })
+  @IsEnum(EnumOrderStatus)
+  @Field(() => EnumOrderStatus, {
+    nullable: true,
+  })
+  status?: "pending" | "inProgress" | "done";
 
   @ApiProperty({
     required: false,
-    type: () => Product,
+    enum: EnumOrderLabel,
   })
-  @ValidateNested()
-  @Type(() => Product)
+  @IsEnum(EnumOrderLabel)
   @IsOptional()
-  product?: Product | null;
+  @Field(() => EnumOrderLabel, {
+    nullable: true,
+  })
+  label?: "fragile" | null;
 }
 
-export { Order };
+export { Order as Order };

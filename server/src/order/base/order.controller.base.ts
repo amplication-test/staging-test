@@ -19,15 +19,14 @@ import { Request } from "express";
 import { plainToClass } from "class-transformer";
 import { ApiNestedQuery } from "../../decorators/api-nested-query.decorator";
 import { OrderService } from "../order.service";
-import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
-import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
+import { Public } from "../../decorators/public.decorator";
 import { OrderCreateInput } from "./OrderCreateInput";
 import { OrderWhereInput } from "./OrderWhereInput";
 import { OrderWhereUniqueInput } from "./OrderWhereUniqueInput";
 import { OrderFindManyArgs } from "./OrderFindManyArgs";
 import { OrderUpdateInput } from "./OrderUpdateInput";
 import { Order } from "./Order";
-@swagger.ApiBearerAuth()
+@swagger.ApiBasicAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
 export class OrderControllerBase {
   constructor(
@@ -35,12 +34,7 @@ export class OrderControllerBase {
     protected readonly rolesBuilder: nestAccessControl.RolesBuilder
   ) {}
 
-  @common.UseInterceptors(AclValidateRequestInterceptor)
-  @nestAccessControl.UseRoles({
-    resource: "Order",
-    action: "create",
-    possession: "any",
-  })
+  @Public()
   @common.Post()
   @swagger.ApiCreatedResponse({ type: Order })
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
@@ -49,25 +43,14 @@ export class OrderControllerBase {
       data: {
         ...data,
 
-        customer: data.customer
-          ? {
-              connect: data.customer,
-            }
-          : undefined,
-
-        product: data.product
-          ? {
-              connect: data.product,
-            }
-          : undefined,
+        customer: {
+          connect: data.customer,
+        },
       },
       select: {
         id: true,
         createdAt: true,
         updatedAt: true,
-        quantity: true,
-        discount: true,
-        totalPrice: true,
 
         customer: {
           select: {
@@ -75,21 +58,13 @@ export class OrderControllerBase {
           },
         },
 
-        product: {
-          select: {
-            id: true,
-          },
-        },
+        status: true,
+        label: true,
       },
     });
   }
 
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @nestAccessControl.UseRoles({
-    resource: "Order",
-    action: "read",
-    possession: "any",
-  })
+  @Public()
   @common.Get()
   @swagger.ApiOkResponse({ type: [Order] })
   @swagger.ApiForbiddenResponse()
@@ -102,9 +77,6 @@ export class OrderControllerBase {
         id: true,
         createdAt: true,
         updatedAt: true,
-        quantity: true,
-        discount: true,
-        totalPrice: true,
 
         customer: {
           select: {
@@ -112,21 +84,13 @@ export class OrderControllerBase {
           },
         },
 
-        product: {
-          select: {
-            id: true,
-          },
-        },
+        status: true,
+        label: true,
       },
     });
   }
 
-  @common.UseInterceptors(AclFilterResponseInterceptor)
-  @nestAccessControl.UseRoles({
-    resource: "Order",
-    action: "read",
-    possession: "own",
-  })
+  @Public()
   @common.Get("/:id")
   @swagger.ApiOkResponse({ type: Order })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
@@ -140,9 +104,6 @@ export class OrderControllerBase {
         id: true,
         createdAt: true,
         updatedAt: true,
-        quantity: true,
-        discount: true,
-        totalPrice: true,
 
         customer: {
           select: {
@@ -150,11 +111,8 @@ export class OrderControllerBase {
           },
         },
 
-        product: {
-          select: {
-            id: true,
-          },
-        },
+        status: true,
+        label: true,
       },
     });
     if (result === null) {
@@ -165,12 +123,7 @@ export class OrderControllerBase {
     return result;
   }
 
-  @common.UseInterceptors(AclValidateRequestInterceptor)
-  @nestAccessControl.UseRoles({
-    resource: "Order",
-    action: "update",
-    possession: "any",
-  })
+  @Public()
   @common.Patch("/:id")
   @swagger.ApiOkResponse({ type: Order })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
@@ -185,25 +138,14 @@ export class OrderControllerBase {
         data: {
           ...data,
 
-          customer: data.customer
-            ? {
-                connect: data.customer,
-              }
-            : undefined,
-
-          product: data.product
-            ? {
-                connect: data.product,
-              }
-            : undefined,
+          customer: {
+            connect: data.customer,
+          },
         },
         select: {
           id: true,
           createdAt: true,
           updatedAt: true,
-          quantity: true,
-          discount: true,
-          totalPrice: true,
 
           customer: {
             select: {
@@ -211,11 +153,8 @@ export class OrderControllerBase {
             },
           },
 
-          product: {
-            select: {
-              id: true,
-            },
-          },
+          status: true,
+          label: true,
         },
       });
     } catch (error) {
@@ -228,11 +167,7 @@ export class OrderControllerBase {
     }
   }
 
-  @nestAccessControl.UseRoles({
-    resource: "Order",
-    action: "delete",
-    possession: "any",
-  })
+  @Public()
   @common.Delete("/:id")
   @swagger.ApiOkResponse({ type: Order })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
@@ -247,9 +182,6 @@ export class OrderControllerBase {
           id: true,
           createdAt: true,
           updatedAt: true,
-          quantity: true,
-          discount: true,
-          totalPrice: true,
 
           customer: {
             select: {
@@ -257,11 +189,8 @@ export class OrderControllerBase {
             },
           },
 
-          product: {
-            select: {
-              id: true,
-            },
-          },
+          status: true,
+          label: true,
         },
       });
     } catch (error) {
