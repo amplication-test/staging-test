@@ -17,6 +17,7 @@ import { IsOptional, ValidateNested } from "class-validator";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
 import { OrderListRelationFilter } from "../../order/base/OrderListRelationFilter";
 import { AddressWhereUniqueInput } from "../../address/base/AddressWhereUniqueInput";
+
 @InputType()
 class CustomerWhereInput {
   @ApiProperty({
@@ -98,4 +99,5 @@ class CustomerWhereInput {
   })
   address?: AddressWhereUniqueInput;
 }
+
 export { CustomerWhereInput };

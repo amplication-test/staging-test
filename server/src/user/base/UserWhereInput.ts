@@ -15,6 +15,7 @@ import { StringFilter } from "../../util/StringFilter";
 import { Type } from "class-transformer";
 import { IsOptional } from "class-validator";
 import { StringNullableFilter } from "../../util/StringNullableFilter";
+
 @InputType()
 class UserWhereInput {
   @ApiProperty({
@@ -61,4 +62,5 @@ class UserWhereInput {
   })
   username?: StringFilter;
 }
+
 export { UserWhereInput };
