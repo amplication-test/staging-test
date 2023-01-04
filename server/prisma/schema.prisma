@@ -1,5 +1,5 @@
-datasource postgres {
-  provider = "postgresql"
+datasource mongo {
+  provider = "mongodb"
   url      = env("DB_URL")
 }
 
@@ -8,7 +8,7 @@ generator client {
 }
 
 model User {
-  id        String   @id @default(cuid())
+  id        String   @id @default(auto()) @map("_id") @mongo.ObjectId
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   firstName String?
@@ -19,7 +19,7 @@ model User {
 }
 
 model Order {
-  id         String    @id @default(cuid())
+  id         String    @id @default(auto()) @map("_id") @mongo.ObjectId
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
   quantity   Int?
@@ -32,7 +32,7 @@ model Order {
 }
 
 model Customer {
-  id        String   @id @default(cuid())
+  id        String   @id @default(auto()) @map("_id") @mongo.ObjectId
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   firstName String?
@@ -45,7 +45,7 @@ model Customer {
 }
 
 model Address {
-  id        String     @id @default(cuid())
+  id        String     @id @default(auto()) @map("_id") @mongo.ObjectId
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
   address_1 String?
@@ -57,7 +57,7 @@ model Address {
 }
 
 model Product {
-  id          String   @id @default(cuid())
+  id          String   @id @default(auto()) @map("_id") @mongo.ObjectId
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   name        String?

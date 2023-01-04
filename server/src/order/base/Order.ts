@@ -22,6 +22,7 @@ import {
 import { Type } from "class-transformer";
 import { Customer } from "../../customer/base/Customer";
 import { Product } from "../../product/base/Product";
+
 @ObjectType()
 class Order {
   @ApiProperty({
@@ -99,4 +100,5 @@ class Order {
   @IsOptional()
   product?: Product | null;
 }
+
 export { Order };
