@@ -15,6 +15,7 @@ import { IsString, IsDate, IsOptional, ValidateNested } from "class-validator";
 import { Type } from "class-transformer";
 import { Order } from "../../order/base/Order";
 import { Address } from "../../address/base/Address";
+
 @ObjectType()
 class Customer {
   @ApiProperty({
@@ -103,4 +104,5 @@ class Customer {
   @IsOptional()
   address?: Address | null;
 }
+
 export { Customer };
