@@ -18,6 +18,7 @@ import { IntNullableFilter } from "../../util/IntNullableFilter";
 import { FloatNullableFilter } from "../../util/FloatNullableFilter";
 import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
 import { ProductWhereUniqueInput } from "../../product/base/ProductWhereUniqueInput";
+
 @InputType()
 class OrderWhereInput {
   @ApiProperty({
@@ -88,4 +89,5 @@ class OrderWhereInput {
   })
   product?: ProductWhereUniqueInput;
 }
+
 export { OrderWhereInput };
