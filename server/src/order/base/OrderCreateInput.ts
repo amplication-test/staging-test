@@ -11,67 +11,41 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsInt, IsOptional, IsNumber, ValidateNested } from "class-validator";
 import { CustomerWhereUniqueInput } from "../../customer/base/CustomerWhereUniqueInput";
+import { ValidateNested, IsEnum, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
-import { ProductWhereUniqueInput } from "../../product/base/ProductWhereUniqueInput";
+import { EnumOrderStatus } from "./EnumOrderStatus";
+import { EnumOrderLabel } from "./EnumOrderLabel";
+
 @InputType()
 class OrderCreateInput {
   @ApiProperty({
-    required: false,
-    type: Number,
-  })
-  @IsInt()
-  @IsOptional()
-  @Field(() => Number, {
-    nullable: true,
-  })
-  quantity?: number | null;
-
-  @ApiProperty({
-    required: false,
-    type: Number,
-  })
-  @IsNumber()
-  @IsOptional()
-  @Field(() => Number, {
-    nullable: true,
-  })
-  discount?: number | null;
-
-  @ApiProperty({
-    required: false,
-    type: Number,
-  })
-  @IsInt()
-  @IsOptional()
-  @Field(() => Number, {
-    nullable: true,
-  })
-  totalPrice?: number | null;
-
-  @ApiProperty({
-    required: false,
+    required: true,
     type: () => CustomerWhereUniqueInput,
   })
   @ValidateNested()
   @Type(() => CustomerWhereUniqueInput)
-  @IsOptional()
-  @Field(() => CustomerWhereUniqueInput, {
-    nullable: true,
+  @Field(() => CustomerWhereUniqueInput)
+  customer!: CustomerWhereUniqueInput;
+
+  @ApiProperty({
+    required: true,
+    enum: EnumOrderStatus,
   })
-  customer?: CustomerWhereUniqueInput | null;
+  @IsEnum(EnumOrderStatus)
+  @Field(() => EnumOrderStatus)
+  status!: "pending" | "inProgress" | "done";
 
   @ApiProperty({
     required: false,
-    type: () => ProductWhereUniqueInput,
+    enum: EnumOrderLabel,
   })
-  @ValidateNested()
-  @Type(() => ProductWhereUniqueInput)
+  @IsEnum(EnumOrderLabel)
   @IsOptional()
-  @Field(() => ProductWhereUniqueInput, {
+  @Field(() => EnumOrderLabel, {
     nullable: true,
   })
-  product?: ProductWhereUniqueInput | null;
+  label?: "fragile" | null;
 }
-export { OrderCreateInput };
+
+export { OrderCreateInput as OrderCreateInput };

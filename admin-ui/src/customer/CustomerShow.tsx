@@ -6,28 +6,52 @@ import {
   ShowProps,
   TextField,
   DateField,
+  BooleanField,
   ReferenceField,
   ReferenceManyField,
   Datagrid,
 } from "react-admin";
 
 import { CUSTOMER_TITLE_FIELD } from "./CustomerTitle";
-import { PRODUCT_TITLE_FIELD } from "../product/ProductTitle";
-import { ADDRESS_TITLE_FIELD } from "../address/AddressTitle";
+import { ORGANIZATION_TITLE_FIELD } from "../organization/OrganizationTitle";
 
 export const CustomerShow = (props: ShowProps): React.ReactElement => {
   return (
     <Show {...props}>
       <SimpleShowLayout>
-        <TextField label="ID" source="id" />
+        <TextField label="Id" source="id" />
         <DateField source="createdAt" label="Created At" />
         <DateField source="updatedAt" label="Updated At" />
+        <TextField label="Email" source="email" />
         <TextField label="First Name" source="firstName" />
         <TextField label="Last Name" source="lastName" />
-        <TextField label="Email" source="email" />
-        <TextField label="Phone" source="phone" />
-        <ReferenceField label="Address" source="address.id" reference="Address">
-          <TextField source={ADDRESS_TITLE_FIELD} />
+        <BooleanField label="VIP" source="isVip" />
+        <TextField label="Birth Data" source="birthData" />
+        <TextField
+          label="Average Sale (-1500.00 - 1500.00)"
+          source="averageSale"
+        />
+        <TextField label="Favorite Number (1 - 20)" source="favoriteNumber" />
+        <TextField label="Geographic Location" source="geoLocation" />
+        <TextField label="Comments (up to 500 characters)" source="comments" />
+        <TextField
+          label="Favorite Colors (multi-select)"
+          source="favoriteColors"
+        />
+        <TextField label="Customer Type" source="customerType" />
+        <ReferenceField
+          label="Organization"
+          source="organization.id"
+          reference="Organization"
+        >
+          <TextField source={ORGANIZATION_TITLE_FIELD} />
+        </ReferenceField>
+        <ReferenceField
+          label="VIP Organization"
+          source="organization.id"
+          reference="Organization"
+        >
+          <TextField source={ORGANIZATION_TITLE_FIELD} />
         </ReferenceField>
         <ReferenceManyField
           reference="Order"
@@ -35,12 +59,9 @@ export const CustomerShow = (props: ShowProps): React.ReactElement => {
           label="Orders"
         >
           <Datagrid rowClick="show">
-            <TextField label="ID" source="id" />
+            <TextField label="Id" source="id" />
             <DateField source="createdAt" label="Created At" />
             <DateField source="updatedAt" label="Updated At" />
-            <TextField label="Quantity" source="quantity" />
-            <TextField label="Discount" source="discount" />
-            <TextField label="Total Price" source="totalPrice" />
             <ReferenceField
               label="Customer"
               source="customer.id"
@@ -48,13 +69,8 @@ export const CustomerShow = (props: ShowProps): React.ReactElement => {
             >
               <TextField source={CUSTOMER_TITLE_FIELD} />
             </ReferenceField>
-            <ReferenceField
-              label="Product"
-              source="product.id"
-              reference="Product"
-            >
-              <TextField source={PRODUCT_TITLE_FIELD} />
-            </ReferenceField>
+            <TextField label="Status" source="status" />
+            <TextField label="Label" source="label" />
           </Datagrid>
         </ReferenceManyField>
       </SimpleShowLayout>

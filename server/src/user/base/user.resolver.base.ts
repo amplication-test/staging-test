@@ -25,6 +25,9 @@ import { DeleteUserArgs } from "./DeleteUserArgs";
 import { UserFindManyArgs } from "./UserFindManyArgs";
 import { UserFindUniqueArgs } from "./UserFindUniqueArgs";
 import { User } from "./User";
+import { OrganizationFindManyArgs } from "../../organization/base/OrganizationFindManyArgs";
+import { Organization } from "../../organization/base/Organization";
+import { Profile } from "../../profile/base/Profile";
 import { UserService } from "../user.service";
 
 @graphql.Resolver(() => User)
@@ -90,7 +93,21 @@ export class UserResolverBase {
   async createUser(@graphql.Args() args: CreateUserArgs): Promise<User> {
     return await this.service.create({
       ...args,
-      data: args.data,
+      data: {
+        ...args.data,
+
+        manager: args.data.manager
+          ? {
+              connect: args.data.manager,
+            }
+          : undefined,
+
+        profile: args.data.profile
+          ? {
+              connect: args.data.profile,
+            }
+          : undefined,
+      },
     });
   }
 
@@ -105,7 +122,21 @@ export class UserResolverBase {
     try {
       return await this.service.update({
         ...args,
-        data: args.data,
+        data: {
+          ...args.data,
+
+          manager: args.data.manager
+            ? {
+                connect: args.data.manager,
+              }
+            : undefined,
+
+          profile: args.data.profile
+            ? {
+                connect: args.data.profile,
+              }
+            : undefined,
+        },
       });
     } catch (error) {
       if (isRecordNotFoundError(error)) {
@@ -134,5 +165,77 @@ export class UserResolverBase {
       }
       throw error;
     }
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => [User])
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "read",
+    possession: "any",
+  })
+  async employees(
+    @graphql.Parent() parent: User,
+    @graphql.Args() args: UserFindManyArgs
+  ): Promise<User[]> {
+    const results = await this.service.findEmployees(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => [Organization])
+  @nestAccessControl.UseRoles({
+    resource: "Organization",
+    action: "read",
+    possession: "any",
+  })
+  async organizations(
+    @graphql.Parent() parent: User,
+    @graphql.Args() args: OrganizationFindManyArgs
+  ): Promise<Organization[]> {
+    const results = await this.service.findOrganizations(parent.id, args);
+
+    if (!results) {
+      return [];
+    }
+
+    return results;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => User, { nullable: true })
+  @nestAccessControl.UseRoles({
+    resource: "User",
+    action: "read",
+    possession: "any",
+  })
+  async manager(@graphql.Parent() parent: User): Promise<User | null> {
+    const result = await this.service.getManager(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
+  }
+
+  @common.UseInterceptors(AclFilterResponseInterceptor)
+  @graphql.ResolveField(() => Profile, { nullable: true })
+  @nestAccessControl.UseRoles({
+    resource: "Profile",
+    action: "read",
+    possession: "any",
+  })
+  async profile(@graphql.Parent() parent: User): Promise<Profile | null> {
+    const result = await this.service.getProfile(parent.id);
+
+    if (!result) {
+      return null;
+    }
+    return result;
   }
 }

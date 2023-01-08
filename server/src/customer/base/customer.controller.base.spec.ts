@@ -19,42 +19,62 @@ import { CustomerService } from "../customer.service";
 const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
-  id: "exampleId",
+  id: 42,
   createdAt: new Date(),
   updatedAt: new Date(),
+  email: "exampleEmail",
   firstName: "exampleFirstName",
   lastName: "exampleLastName",
-  email: "exampleEmail",
-  phone: "examplePhone",
+  isVip: "true",
+  birthData: new Date(),
+  averageSale: 42.42,
+  favoriteNumber: 42,
+  geoLocation: "exampleGeoLocation",
+  comments: "exampleComments",
 };
 const CREATE_RESULT = {
-  id: "exampleId",
+  id: 42,
   createdAt: new Date(),
   updatedAt: new Date(),
+  email: "exampleEmail",
   firstName: "exampleFirstName",
   lastName: "exampleLastName",
-  email: "exampleEmail",
-  phone: "examplePhone",
+  isVip: "true",
+  birthData: new Date(),
+  averageSale: 42.42,
+  favoriteNumber: 42,
+  geoLocation: "exampleGeoLocation",
+  comments: "exampleComments",
 };
 const FIND_MANY_RESULT = [
   {
-    id: "exampleId",
+    id: 42,
     createdAt: new Date(),
     updatedAt: new Date(),
+    email: "exampleEmail",
     firstName: "exampleFirstName",
     lastName: "exampleLastName",
-    email: "exampleEmail",
-    phone: "examplePhone",
+    isVip: "true",
+    birthData: new Date(),
+    averageSale: 42.42,
+    favoriteNumber: 42,
+    geoLocation: "exampleGeoLocation",
+    comments: "exampleComments",
   },
 ];
 const FIND_ONE_RESULT = {
-  id: "exampleId",
+  id: 42,
   createdAt: new Date(),
   updatedAt: new Date(),
+  email: "exampleEmail",
   firstName: "exampleFirstName",
   lastName: "exampleLastName",
-  email: "exampleEmail",
-  phone: "examplePhone",
+  isVip: "true",
+  birthData: new Date(),
+  averageSale: 42.42,
+  favoriteNumber: 42,
+  geoLocation: "exampleGeoLocation",
+  comments: "exampleComments",
 };
 
 const service = {
@@ -141,6 +161,7 @@ describe("Customer", () => {
         ...CREATE_RESULT,
         createdAt: CREATE_RESULT.createdAt.toISOString(),
         updatedAt: CREATE_RESULT.updatedAt.toISOString(),
+        birthData: CREATE_RESULT.birthData.toISOString(),
       });
   });
 
@@ -153,6 +174,7 @@ describe("Customer", () => {
           ...FIND_MANY_RESULT[0],
           createdAt: FIND_MANY_RESULT[0].createdAt.toISOString(),
           updatedAt: FIND_MANY_RESULT[0].updatedAt.toISOString(),
+          birthData: FIND_MANY_RESULT[0].birthData.toISOString(),
         },
       ]);
   });
@@ -176,6 +198,7 @@ describe("Customer", () => {
         ...FIND_ONE_RESULT,
         createdAt: FIND_ONE_RESULT.createdAt.toISOString(),
         updatedAt: FIND_ONE_RESULT.updatedAt.toISOString(),
+        birthData: FIND_ONE_RESULT.birthData.toISOString(),
       });
   });
 
@@ -189,6 +212,7 @@ describe("Customer", () => {
         ...CREATE_RESULT,
         createdAt: CREATE_RESULT.createdAt.toISOString(),
         updatedAt: CREATE_RESULT.updatedAt.toISOString(),
+        birthData: CREATE_RESULT.birthData.toISOString(),
       })
       .then(function () {
         agent

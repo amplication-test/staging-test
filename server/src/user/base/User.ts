@@ -11,58 +11,29 @@ https://docs.amplication.com/how-to/custom-code
   */
 import { ObjectType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsDate, IsOptional, IsJSON } from "class-validator";
-import { Type } from "class-transformer";
+
+import {
+  IsString,
+  IsJSON,
+  IsInt,
+  IsDate,
+  IsNumber,
+  ValidateNested,
+  IsOptional,
+  IsEnum,
+  IsBoolean,
+} from "class-validator";
+
 import { GraphQLJSON } from "graphql-type-json";
 import { JsonValue } from "type-fest";
+import { Type } from "class-transformer";
+import { Organization } from "../../organization/base/Organization";
+import { EnumUserInterests } from "./EnumUserInterests";
+import { EnumUserPriority } from "./EnumUserPriority";
+import { Profile } from "../../profile/base/Profile";
+
 @ObjectType()
 class User {
-  @ApiProperty({
-    required: true,
-    type: String,
-  })
-  @IsString()
-  @Field(() => String)
-  id!: string;
-
-  @ApiProperty({
-    required: true,
-  })
-  @IsDate()
-  @Type(() => Date)
-  @Field(() => Date)
-  createdAt!: Date;
-
-  @ApiProperty({
-    required: true,
-  })
-  @IsDate()
-  @Type(() => Date)
-  @Field(() => Date)
-  updatedAt!: Date;
-
-  @ApiProperty({
-    required: false,
-    type: String,
-  })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  firstName!: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: String,
-  })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  lastName!: string | null;
-
   @ApiProperty({
     required: true,
     type: String,
@@ -77,5 +48,145 @@ class User {
   @IsJSON()
   @Field(() => GraphQLJSON)
   roles!: JsonValue;
+
+  @ApiProperty({
+    required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  id!: string;
+
+  @ApiProperty({
+    required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  name!: string;
+
+  @ApiProperty({
+    required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  bio!: string;
+
+  @ApiProperty({
+    required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  email!: string;
+
+  @ApiProperty({
+    required: true,
+    type: Number,
+  })
+  @IsInt()
+  @Field(() => Number)
+  age!: number;
+
+  @ApiProperty({
+    required: true,
+  })
+  @IsDate()
+  @Type(() => Date)
+  @Field(() => Date)
+  birthDate!: Date;
+
+  @ApiProperty({
+    required: true,
+    type: Number,
+  })
+  @IsNumber()
+  @Field(() => Number)
+  score!: number;
+
+  @ApiProperty({
+    required: false,
+    type: () => User,
+  })
+  @ValidateNested()
+  @Type(() => User)
+  @IsOptional()
+  manager?: User | null;
+
+  @ApiProperty({
+    required: false,
+    type: () => [User],
+  })
+  @ValidateNested()
+  @Type(() => User)
+  @IsOptional()
+  employees?: Array<User>;
+
+  @ApiProperty({
+    required: false,
+    type: () => [Organization],
+  })
+  @ValidateNested()
+  @Type(() => Organization)
+  @IsOptional()
+  organizations?: Array<Organization>;
+
+  @ApiProperty({
+    required: true,
+    enum: EnumUserInterests,
+    isArray: true,
+  })
+  @IsEnum(EnumUserInterests, {
+    each: true,
+  })
+  @IsOptional()
+  @Field(() => [EnumUserInterests], {
+    nullable: true,
+  })
+  interests?: Array<"programming" | "design">;
+
+  @ApiProperty({
+    required: true,
+    enum: EnumUserPriority,
+  })
+  @IsEnum(EnumUserPriority)
+  @Field(() => EnumUserPriority, {
+    nullable: true,
+  })
+  priority?: "high" | "medium" | "low";
+
+  @ApiProperty({
+    required: true,
+    type: Boolean,
+  })
+  @IsBoolean()
+  @Field(() => Boolean)
+  isCurious!: boolean;
+
+  @ApiProperty({
+    required: true,
+    type: String,
+  })
+  @IsString()
+  @Field(() => String)
+  location!: string;
+
+  @ApiProperty({
+    required: true,
+  })
+  @IsJSON()
+  @Field(() => GraphQLJSON)
+  extendedProperties!: JsonValue;
+
+  @ApiProperty({
+    required: false,
+    type: () => Profile,
+  })
+  @ValidateNested()
+  @Type(() => Profile)
+  @IsOptional()
+  profile?: Profile | null;
 }
-export { User };
+
+export { User as User };

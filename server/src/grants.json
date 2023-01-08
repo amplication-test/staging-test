@@ -2,11 +2,17 @@
   {
     "role": "user",
     "resource": "User",
-    "action": "read:own",
+    "action": "create:any",
     "attributes": "*"
   },
   {
-    "role": "user",
+    "role": "admin",
+    "resource": "User",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "areaManager",
     "resource": "User",
     "action": "create:any",
     "attributes": "*"
@@ -14,11 +20,17 @@
   {
     "role": "user",
     "resource": "User",
-    "action": "update:any",
+    "action": "delete:any",
     "attributes": "*"
   },
   {
-    "role": "user",
+    "role": "admin",
+    "resource": "User",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "areaManager",
     "resource": "User",
     "action": "delete:any",
     "attributes": "*"
@@ -30,49 +42,301 @@
     "attributes": "*"
   },
   {
-    "role": "user",
-    "resource": "Order",
-    "action": "read:own",
+    "role": "admin",
+    "resource": "User",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "areaManager",
+    "resource": "User",
+    "action": "read:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Order",
-    "action": "create:any",
+    "resource": "User",
+    "action": "update:any",
     "attributes": "*"
   },
   {
-    "role": "user",
-    "resource": "Order",
+    "role": "admin",
+    "resource": "User",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "areaManager",
+    "resource": "User",
     "action": "update:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Order",
+    "resource": "User",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "User",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "areaManager",
+    "resource": "User",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Profile",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Profile",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "areaManager",
+    "resource": "Profile",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Profile",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Profile",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "areaManager",
+    "resource": "Profile",
     "action": "delete:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Order",
+    "resource": "Profile",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Profile",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "areaManager",
+    "resource": "Profile",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Profile",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Profile",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "areaManager",
+    "resource": "Profile",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Profile",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Profile",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "areaManager",
+    "resource": "Profile",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Organization",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Organization",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "areaManager",
+    "resource": "Organization",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Organization",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Organization",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "areaManager",
+    "resource": "Organization",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Organization",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Organization",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "areaManager",
+    "resource": "Organization",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Organization",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Organization",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "areaManager",
+    "resource": "Organization",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Organization",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Organization",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "areaManager",
+    "resource": "Organization",
+    "action": "read:own",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Customer",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Customer",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "areaManager",
+    "resource": "Customer",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Customer",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Customer",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "areaManager",
+    "resource": "Customer",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Customer",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Customer",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "areaManager",
+    "resource": "Customer",
     "action": "read:any",
     "attributes": "*"
   },
   {
     "role": "user",
     "resource": "Customer",
-    "action": "read:own",
+    "action": "update:any",
     "attributes": "*"
   },
   {
-    "role": "user",
+    "role": "admin",
     "resource": "Customer",
-    "action": "create:any",
+    "action": "update:any",
     "attributes": "*"
   },
   {
-    "role": "user",
+    "role": "areaManager",
     "resource": "Customer",
     "action": "update:any",
     "attributes": "*"
@@ -80,73 +344,109 @@
   {
     "role": "user",
     "resource": "Customer",
-    "action": "delete:any",
+    "action": "read:own",
     "attributes": "*"
   },
   {
-    "role": "user",
+    "role": "admin",
     "resource": "Customer",
-    "action": "read:any",
+    "action": "read:own",
     "attributes": "*"
   },
   {
-    "role": "user",
-    "resource": "Address",
+    "role": "areaManager",
+    "resource": "Customer",
     "action": "read:own",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Address",
+    "resource": "Empty",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Empty",
+    "action": "create:any",
+    "attributes": "*"
+  },
+  {
+    "role": "areaManager",
+    "resource": "Empty",
     "action": "create:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Address",
-    "action": "update:any",
+    "resource": "Empty",
+    "action": "delete:any",
     "attributes": "*"
   },
   {
-    "role": "user",
-    "resource": "Address",
+    "role": "admin",
+    "resource": "Empty",
+    "action": "delete:any",
+    "attributes": "*"
+  },
+  {
+    "role": "areaManager",
+    "resource": "Empty",
     "action": "delete:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Address",
+    "resource": "Empty",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Empty",
+    "action": "read:any",
+    "attributes": "*"
+  },
+  {
+    "role": "areaManager",
+    "resource": "Empty",
     "action": "read:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Product",
+    "resource": "Empty",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "admin",
+    "resource": "Empty",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "areaManager",
+    "resource": "Empty",
+    "action": "update:any",
+    "attributes": "*"
+  },
+  {
+    "role": "user",
+    "resource": "Empty",
     "action": "read:own",
     "attributes": "*"
   },
   {
-    "role": "user",
-    "resource": "Product",
-    "action": "create:any",
+    "role": "admin",
+    "resource": "Empty",
+    "action": "read:own",
     "attributes": "*"
   },
   {
-    "role": "user",
-    "resource": "Product",
-    "action": "update:any",
-    "attributes": "*"
-  },
-  {
-    "role": "user",
-    "resource": "Product",
-    "action": "delete:any",
-    "attributes": "*"
-  },
-  {
-    "role": "user",
-    "resource": "Product",
-    "action": "read:any",
+    "role": "areaManager",
+    "resource": "Empty",
+    "action": "read:own",
     "attributes": "*"
   }
 ]

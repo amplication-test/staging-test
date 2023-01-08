@@ -1,8 +1,9 @@
 import * as dotenv from "dotenv";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "../prisma/generated-prisma-client";
 import { Salt, parseSalt } from "../src/auth/password.service";
 import { hash } from "bcrypt";
 import { customSeed } from "./customSeed";
+import { EnumUserPriority } from "../src/user/base/EnumUserPriority";
 
 if (require.main === module) {
   dotenv.config();
@@ -29,6 +30,20 @@ async function seed(bcryptSalt: Salt) {
     username: "admin",
     password: await hash("admin", bcryptSalt),
     roles: ["user"],
+    name: "",
+    bio: "",
+    email: "example@example.com",
+    age: 0,
+    birthDate: new Date(),
+    score: 0,
+    interests: [],
+    priority: EnumUserPriority.High,
+    isCurious: false,
+    location: "(32.085300, 34.781769)",
+
+    extendedProperties: {
+      foo: "bar",
+    },
   };
   await client.user.upsert({
     where: { username: data.username },
