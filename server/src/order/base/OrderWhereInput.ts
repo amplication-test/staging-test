@@ -90,4 +90,4 @@ class OrderWhereInput {
   product?: ProductWhereUniqueInput;
 }
 
-export { OrderWhereInput };
+export { OrderWhereInput as OrderWhereInput };

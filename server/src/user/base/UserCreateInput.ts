@@ -63,4 +63,4 @@ class UserCreateInput {
   roles!: InputJsonValue;
 }
 
-export { UserCreateInput };
+export { UserCreateInput as UserCreateInput };

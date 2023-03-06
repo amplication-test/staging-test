@@ -100,4 +100,4 @@ class CustomerWhereInput {
   address?: AddressWhereUniqueInput;
 }
 
-export { CustomerWhereInput };
+export { CustomerWhereInput as CustomerWhereInput };

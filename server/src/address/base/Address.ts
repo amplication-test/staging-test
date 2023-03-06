@@ -112,4 +112,4 @@ class Address {
   customers?: Array<Customer>;
 }
 
-export { Address };
+export { Address as Address };

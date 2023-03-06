@@ -76,4 +76,4 @@ class OrderUpdateInput {
   product?: ProductWhereUniqueInput | null;
 }
 
-export { OrderUpdateInput };
+export { OrderUpdateInput as OrderUpdateInput };

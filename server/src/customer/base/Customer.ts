@@ -105,4 +105,4 @@ class Customer {
   address?: Address | null;
 }
 
-export { Customer };
+export { Customer as Customer };

@@ -101,4 +101,4 @@ class Order {
   product?: Product | null;
 }
 
-export { Order };
+export { Order as Order };

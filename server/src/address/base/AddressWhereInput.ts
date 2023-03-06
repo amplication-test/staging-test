@@ -99,4 +99,4 @@ class AddressWhereInput {
   customers?: CustomerListRelationFilter;
 }
 
-export { AddressWhereInput };
+export { AddressWhereInput as AddressWhereInput };

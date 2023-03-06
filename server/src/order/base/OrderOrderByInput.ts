@@ -91,4 +91,4 @@ class OrderOrderByInput {
   productId?: SortOrder;
 }
 
-export { OrderOrderByInput };
+export { OrderOrderByInput as OrderOrderByInput };

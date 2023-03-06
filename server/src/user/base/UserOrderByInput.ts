@@ -91,4 +91,4 @@ class UserOrderByInput {
   roles?: SortOrder;
 }
 
-export { UserOrderByInput };
+export { UserOrderByInput as UserOrderByInput };

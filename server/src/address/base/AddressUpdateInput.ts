@@ -85,4 +85,4 @@ class AddressUpdateInput {
   customers?: CustomerUpdateManyWithoutAddressesInput;
 }
 
-export { AddressUpdateInput };
+export { AddressUpdateInput as AddressUpdateInput };

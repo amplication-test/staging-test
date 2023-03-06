@@ -76,4 +76,4 @@ class OrderCreateInput {
   product?: ProductWhereUniqueInput | null;
 }
 
-export { OrderCreateInput };
+export { OrderCreateInput as OrderCreateInput };

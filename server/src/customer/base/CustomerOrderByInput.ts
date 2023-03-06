@@ -91,4 +91,4 @@ class CustomerOrderByInput {
   addressId?: SortOrder;
 }
 
-export { CustomerOrderByInput };
+export { CustomerOrderByInput as CustomerOrderByInput };

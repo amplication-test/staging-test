@@ -85,4 +85,4 @@ class AddressCreateInput {
   customers?: CustomerCreateNestedManyWithoutAddressesInput;
 }
 
-export { AddressCreateInput };
+export { AddressCreateInput as AddressCreateInput };

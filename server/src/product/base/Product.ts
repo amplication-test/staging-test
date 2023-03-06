@@ -90,4 +90,4 @@ class Product {
   orders?: Array<Order>;
 }
 
-export { Product };
+export { Product as Product };
